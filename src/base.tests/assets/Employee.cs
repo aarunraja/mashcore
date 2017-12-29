@@ -5,6 +5,7 @@ namespace Masha.Foundation.Tests
     public class Employee : IEquatable<Employee>
     {
         public string Name { get; set; }
+        public string City {get;set;}
 
         public Employee(string name)
         {

@@ -8,7 +8,7 @@ namespace Masha.Foundation
         private string plainMsg;
         private bool isCodeBasedError;
 
-        internal static readonly Error None = new Error(-1);
+        public static readonly Error None = new Error(-1);
 
         public Error(int errCode)
         {
@@ -28,6 +28,9 @@ namespace Masha.Foundation
 
         public static Error Of(int errorCode) => new Error(errorCode);
         public static Error Of(string message) => new Error(message);
+
+        public static Result AsResult(int errCode) => new Result(Error.Of(errCode));
+        public static Result AsResult(string message) => new Result(Error.Of(message));
 
         public override bool Equals(object obj)
         {

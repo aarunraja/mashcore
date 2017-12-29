@@ -2,20 +2,30 @@ namespace Masha.Foundation
 {
     using System;
 
-    public class Result
+    public class Result<T>
     {
         internal readonly Error error;
+        internal readonly T value;
 
         public bool HasValue {get;}
         public bool HasError => !this.HasValue; 
 
+        public Result(T value)
+        {
+            this.value = value;
+            this.error = Error.None;
+            this.HasValue = true;
+        }
+
         public Result(Error error)
         {
             this.error = error;
-            this.HasValue = error == Error.None;
+            this.value = default(T);
+            this.HasValue = false;
         }
 
-        public static implicit operator Result(Error error) => new Result(error);
+        public static implicit operator Result<T>(T value) => new Result<T>(value);
+        public static implicit operator Result<T>(Error error) => new Result<T>(error);
 
         // override object.Equals
         public override bool Equals(object obj)
@@ -25,10 +35,10 @@ namespace Masha.Foundation
                 return false;
             }
             
-            var tryOther = (Result) obj;
+            var tryOther = (Result<T>) obj;
             if(HasValue && tryOther.HasValue)
             {
-                return true;
+                return this.value.Equals(tryOther.value);
             }else if(HasError && tryOther.HasError)
             {
                 return this.error.Equals(tryOther.error);
@@ -39,7 +49,8 @@ namespace Masha.Foundation
         // override object.GetHashCode
         public override int GetHashCode()
         {
-            return error.GetHashCode();
+            if(HasValue) return value.GetHashCode();
+            else return error.GetHashCode();
         }
     }
 }
