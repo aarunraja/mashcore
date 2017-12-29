@@ -29,8 +29,11 @@ namespace Masha.Foundation
         public static Error Of(int errorCode) => new Error(errorCode);
         public static Error Of(string message) => new Error(message);
 
-        public static Result AsResult(int errCode) => new Result(Error.Of(errCode));
-        public static Result AsResult(string message) => new Result(Error.Of(message));
+        public static Result As(int errCode) => new Result(Error.Of(errCode));
+        public static Result As(string message) => new Result(Error.Of(message));
+
+        public static Result<T> As<T>(int errCode) => new Result<T>(Error.Of(errCode));
+        public static Result<T> As<T>(string message) => new Result<T>(Error.Of(message));
 
         public override bool Equals(object obj)
         {
