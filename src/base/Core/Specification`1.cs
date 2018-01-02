@@ -13,12 +13,6 @@
             this.predicate = predicate;
         }
 
-        // Only for subclasses
-        protected Specification()
-        {
-
-        }
-
         public static Specification<T> operator & (Specification<T> leftSpec, Specification<T> rightSpec)
         {
             return new Specification<T>(leftSpec.predicate.AndAlso(rightSpec.predicate));
