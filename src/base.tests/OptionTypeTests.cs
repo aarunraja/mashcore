@@ -97,7 +97,7 @@ namespace Masha.Foundation.Tests
         {
             var baseValue = 2;
             var expected = Some(Math.Sqrt(baseValue));
-            var actual = Some(baseValue).Map(n => Math.Sqrt(n));
+            var actual = Some(baseValue).EMap(n => Math.Sqrt(n));
             Assert.Equal(expected, actual);
         }    
         #endregion

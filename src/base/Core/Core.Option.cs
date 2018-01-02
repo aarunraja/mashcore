@@ -11,7 +11,7 @@ namespace Masha.Foundation
             Func<T,R> Some, Func<R> None) =>
                 option.HasSome ? Some(option.Value) : None();
 
-        public static Option<R> Map<T, R>(this Option<T> option,
+        public static Option<R> EMap<T, R>(this Option<T> option,
             Func<T, R> f) =>
                 option.Match((t) => Some(f(t)), () => None);
     }
