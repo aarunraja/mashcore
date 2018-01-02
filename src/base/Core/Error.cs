@@ -41,7 +41,8 @@ namespace Masha.Foundation
             {
                 var errorOther = (Error)obj;
 
-                if (this.Code == errorOther.Code ||
+                if (this.Code == errorOther.Code) return true;
+                if((!string.IsNullOrEmpty(this.Message) && !string.IsNullOrEmpty(errorOther.Message)) && 
                     this.Message.Equals(errorOther.Message, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;

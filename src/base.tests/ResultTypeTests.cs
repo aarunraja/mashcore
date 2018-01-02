@@ -77,7 +77,7 @@ namespace Masha.Foundation.Tests
             A.CallTo(() => repo.Insert(command)).Returns(expected);
 
             var actual = Result(command)
-                .EMap(repo.Insert);
+                .Bind(repo.Insert);
             Assert.Equal(expected, actual);
         }  
 
@@ -95,7 +95,7 @@ namespace Masha.Foundation.Tests
             A.CallTo(() => repo.Update(command)).Returns(expected);
 
             var actual = Result(command)
-                .EMap(repo.Update);
+                .Bind(repo.Update);
             Assert.Equal(expected.HasError, actual.Match(r => r.HasError, (e) => false));
         }    
         #endregion
