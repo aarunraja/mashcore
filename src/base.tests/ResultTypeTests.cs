@@ -91,7 +91,7 @@ namespace Masha.Foundation.Tests
             };
             var repo = A.Fake<IEmployeeRepository>();
 
-            var expected = Error.AsResult(1010);
+            var expected = Error.As(1010);
             A.CallTo(() => repo.Update(command)).Returns(expected);
 
             var actual = Result(command)

@@ -16,9 +16,39 @@ namespace Masha.Foundation
             result.HasValue ? pass() : fail(result.error);
 
         public static Result<S> Map<T, S>(this Result<T> result,
-            Func<T, S> f) => result.HasValue ? Result(f(result.value)) : result.error;
+            Func<T, S> f)
+        {
+            if(result.HasValue)
+            {
+                var fresult = f(result.value);
+                if(IsBoxingType(fresult.GetType().FullName))
+                {
+                    return fresult;
+                }else {
+                    return Result(fresult);
+                }
+            } else
+            {
+                return result.error;
+            }
+        }
         
         public static Result<S> Map<S>(this Result result,
-            Func<S> f) => result.HasValue ? Result(f()) : result.error;
+            Func<S> f) 
+        {
+            if(result.HasValue)
+            {
+                var fresult = f();
+                if(IsBoxingType(fresult.GetType().FullName))
+                {
+                    return fresult;
+                }else {
+                    return Result(fresult);
+                }
+            }else
+            {
+                return result.error;
+            }
+        }
     }
 }
