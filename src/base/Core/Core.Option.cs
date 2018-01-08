@@ -15,6 +15,17 @@ namespace Masha.Foundation
             Func<T, R> f) =>
                 option.Match((t) => Some(f(t)), () => None);
 
+        public static Option<T> Bind<T>(this Option<T> result,
+            Specification<T> spec)
+        {
+            if (result.HasSome)
+            {
+                var predicateCompiled = spec.predicate.Compile();
+                return predicateCompiled.Invoke(result.Value) ? result : None;
+            }
+            return None;
+        }
+
         public static Option<R> Map<T, R>(this Option<T> option,
             Func<T, Option<R>> f) =>
                 option.Match(t => f(t), () => None);
