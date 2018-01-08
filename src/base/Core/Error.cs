@@ -22,6 +22,13 @@ namespace Masha.Foundation
             isCodeBasedError = false;
         }
 
+        private void FromAnotherError(Error anotherError)
+        {
+            this.errCode = anotherError.errCode;
+            this.isCodeBasedError = anotherError.isCodeBasedError;
+            this.plainMsg = anotherError.plainMsg;
+        }
+
         public int Code => errCode;
         public string Message => plainMsg;
         public bool IsNone => this.Equals(Error.None);
@@ -34,6 +41,7 @@ namespace Masha.Foundation
 
         public static Result<T> As<T>(int errCode) => new Result<T>(Error.Of(errCode));
         public static Result<T> As<T>(string message) => new Result<T>(Error.Of(message));
+        public static Result<T> As<T>(Error error) => new Result<T>(error);
 
         public override bool Equals(object obj)
         {

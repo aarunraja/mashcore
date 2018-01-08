@@ -2,6 +2,10 @@
 {
     using System;
     using Xunit;
+    using FakeItEasy;
+    using Masha.Foundation;
+    using static Masha.Foundation.Core;
+    using static Masha.Foundation.Tests.General;
 
     public class MapBindTests
     {
@@ -29,7 +33,7 @@
             var genderOfMozhi = new UserRepository()
                 .FindByIdAsResult(3)
                 .Bind(u => u.Gender);
-            Assert.IsType<Option<Option<string>>>(genderOfMozhi);
+            Assert.IsType<Result<Result<string>>>(genderOfMozhi);
         }
 
         [Fact]

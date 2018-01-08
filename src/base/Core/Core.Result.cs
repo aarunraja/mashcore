@@ -33,7 +33,7 @@ namespace Masha.Foundation
             Func<S> f) => result.HasValue ? Result(f()) : result.error;
 
         public static Result<S> Map<T, S>(this Result<T> result,
-            Func<T, S> f) => result.Match(pass: f(result.value), fail: result.error);
+            Func<T, S> f) => result.HasValue ? f(result.value) : Error.As<S>(result.error);
 
         public static Result<T> Map<T>(this Result<T> result,
             Specification<T> spec, Func<Error> fail)
