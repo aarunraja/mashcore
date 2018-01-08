@@ -9,6 +9,7 @@ namespace Masha.Foundation
         private bool isCodeBasedError;
 
         public static readonly Error None = new Error(-1);
+        public static readonly Error SomeError = new Error(0);
 
         public Error(int errCode)
         {
@@ -38,6 +39,7 @@ namespace Masha.Foundation
 
         public static Result As(int errCode) => new Result(Error.Of(errCode));
         public static Result As(string message) => new Result(Error.Of(message));
+        public static Result As(Error error) => new Result(error);
 
         public static Result<T> As<T>(int errCode) => new Result<T>(Error.Of(errCode));
         public static Result<T> As<T>(string message) => new Result<T>(Error.Of(message));

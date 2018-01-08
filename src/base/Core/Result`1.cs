@@ -26,6 +26,8 @@ namespace Masha.Foundation
 
         public static implicit operator Result<T>(T value) => new Result<T>(value);
         public static implicit operator Result<T>(Error error) => new Result<T>(error);
+        public static implicit operator Result<T>(Option<T> option) =>
+            option.Match(Some: v => new Result<T>(v), None: () => new Result<T>(Error.SomeError));
 
         // override object.Equals
         public override bool Equals(object obj)
