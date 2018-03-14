@@ -10,7 +10,7 @@
     public class SpecificationTests
     {
         [Fact]
-        public void Return_Result__When_BindTo_Result()
+        public void Return_Result__When_MapTo_Result()
         {
             var command = new UpdateEmployee
             {
@@ -27,9 +27,9 @@
             var ageShouldBe45 = Spec<UpdateEmployee>(u => u.Age > 45);
 
             var actual = Result(command)
-                .Bind(ageShouldBe45, () => Error.Of(1011))
-                .Bind(Spec<UpdateEmployee>(e => e.City == "Vickramasingapuram"), () => Error.Of(1012))
-                .Bind(repo.Insert);
+                .Map(ageShouldBe45, () => Error.Of(1011))
+                .Map(Spec<UpdateEmployee>(e => e.City == "Vickramasingapuram"), () => Error.Of(1012))
+                .Map(repo.Insert);
             var actualResult = actual.HasError;
             Assert.Equal(!expected.IsNone, actualResult);
         }
@@ -50,7 +50,7 @@
             var allSpec = ageShouldBe30 & cityNotBeMumbai & empIdShouldStartsWithA;
 
             var actual = Result(command)
-                .Bind(allSpec, () => Error.Of(1011));
+                .Map(allSpec, () => Error.Of(1011));
             Assert.True(actual.HasValue);
         }
 
@@ -70,7 +70,7 @@
             var allSpec = ageShouldBe45 | (cityNotBeMumbai & empIdShouldStartsWithE);
 
             var actual = Result(command)
-                .Bind(allSpec, () => Error.Of(1011));
+                .Map(allSpec, () => Error.Of(1011));
             Assert.True(actual.HasError);
         }
     }

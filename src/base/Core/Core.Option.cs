@@ -11,11 +11,9 @@ namespace Masha.Foundation
             Func<T,R> Some, Func<R> None) =>
                 option.HasSome ? Some(option.Value) : None();
 
-        public static Option<R> Bind<T, R>(this Option<T> option,
-            Func<T, R> f) =>
-                option.Match((t) => Some(f(t)), () => None);
+        public static T GetOrElse<T>(this Option<T> option, T alt) => option.HasSome ? option.Value : alt;
 
-        public static Option<T> Bind<T>(this Option<T> result,
+        public static Option<T> Map<T>(this Option<T> result,
             Specification<T> spec)
         {
             if (result.HasSome)

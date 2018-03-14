@@ -77,7 +77,7 @@ namespace Masha.Foundation.Tests
             A.CallTo(() => repo.Insert(command)).Returns(expected);
 
             var actual = Result(command)
-                .Bind(repo.Insert);
+                .Map(repo.Insert);
             Assert.Equal(expected, actual);
         }  
 
@@ -91,12 +91,12 @@ namespace Masha.Foundation.Tests
             };
             var repo = A.Fake<IEmployeeRepository>();
 
-            var expected = Error.As(1010);
+            var expected = Error.As<Employee>(1010);
             A.CallTo(() => repo.Update(command)).Returns(expected);
 
             var actual = Result(command)
-                .Bind(repo.Update);
-            Assert.Equal(expected.HasError, actual.Match(r => r.HasError, (e) => false));
+                .Map(repo.Update);
+            Assert.Equal(expected, actual);
         }    
         #endregion
     }

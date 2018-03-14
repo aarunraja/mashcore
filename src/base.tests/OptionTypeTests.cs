@@ -93,13 +93,13 @@ namespace Masha.Foundation.Tests
         #endregion
 
         #region Map
-        public void Return_Mapped_Value__When_Some_Apply_Map()
-        {
-            var baseValue = 2;
-            var expected = Some(Math.Sqrt(baseValue));
-            var actual = Some(baseValue).Bind(n => Math.Sqrt(n));
-            Assert.Equal(expected, actual);
-        }    
+        //public void Return_Bind_Value__When_Some_Apply_Map()
+        //{
+        //    var baseValue = 2;
+        //    var expected = Math.Sqrt(baseValue);
+        //    var actual = Some(baseValue).Bind(n => Math.Sqrt(n));
+        //    Assert.Equal(expected, actual);
+        //}    
         #endregion
     }
 }

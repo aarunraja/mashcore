@@ -8,7 +8,7 @@ namespace Masha.Foundation.Tests
 
     public interface IEmployeeRepository
     {
-        Result Update(UpdateEmployee paramter);
+        Result<Employee> Update(UpdateEmployee paramter);
         Result<Employee> Insert(UpdateEmployee parameter);
         Task<Result<Employee>> GetById(string deviceId);
     }
