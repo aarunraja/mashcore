@@ -12,6 +12,10 @@ namespace Masha.Foundation
                 option.HasSome ? Some(option.Value) : None();
 
         public static T GetOrElse<T>(this Option<T> option, T alt) => option.HasSome ? option.Value : alt;
+        
+        public static Option<R> Map<T, R>(this Option<T> option,
+            Func<T, Option<R>> f) =>
+                option.Match(t => f(t), () => None);
 
         public static Option<T> Map<T>(this Option<T> result,
             Specification<T> spec)
@@ -23,9 +27,5 @@ namespace Masha.Foundation
             }
             return None;
         }
-
-        public static Option<R> Map<T, R>(this Option<T> option,
-            Func<T, Option<R>> f) =>
-                option.Match(t => f(t), () => None);
     }
 }

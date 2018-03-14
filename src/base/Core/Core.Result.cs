@@ -75,14 +75,14 @@ namespace Masha.Foundation
         #endregion
 
         #region Result Map
-        public static Result<S> Map<S>(this Result result,
-            Func<S> f) => result.HasValue ? Result(f()) : result.error;
+        //public static Result<S> Map<S>(this Result result,
+        //    Func<S> f) => result.HasValue ? Result(f()) : result.error;
 
-        public static Result Map(this Result result,
-            Func<Result> f) => result.HasValue ? f() : result.error;
+        //public static Result Map(this Result result,
+        //    Func<Result> f) => result.HasValue ? f() : result.error;
 
-        public static Result<S> Map<S>(this Result result,
-            Func<Result<S>> f) => result.HasValue ? f() : result.error;
+        //public static Result<S> Map<S>(this Result result,
+        //    Func<Result<S>> f) => result.HasValue ? f() : result.error;
         #endregion
     }
 }

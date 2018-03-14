@@ -79,24 +79,6 @@ namespace Masha.Foundation.Tests
             var actual = Result(command)
                 .Map(repo.Insert);
             Assert.Equal(expected, actual);
-        }  
-
-        [Fact]
-        public void Return_Mapped_Value__When_NGeneric_Result_Apply_Map()
-        {
-            var employeeId = "A00684";
-            var command = new UpdateEmployee {
-                EmployeeId = employeeId,
-                City = "Vickramasingapuram"
-            };
-            var repo = A.Fake<IEmployeeRepository>();
-
-            var expected = Error.As<Employee>(1010);
-            A.CallTo(() => repo.Update(command)).Returns(expected);
-
-            var actual = Result(command)
-                .Map(repo.Update);
-            Assert.Equal(expected, actual);
         }    
         #endregion
     }
