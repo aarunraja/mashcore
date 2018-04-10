@@ -60,6 +60,24 @@ namespace Masha.Foundation.Tests
             var actual = repo.GetById(7070);
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Return_Actual__When_Result_Has_Value()
+        {
+            var employee = new Employee("Tamil");
+            var expected = employee;
+            var actual = Result(employee).GetOrElse(new Employee(""));
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Return_Else__When_Result_Has_Value()
+        {
+            Employee employee = null;
+            var expected = new Employee("");
+            var actual = Result(employee).GetOrElse(new Employee(""));
+            Assert.Equal(expected, actual);
+        }
         #endregion
 
         #region Map
@@ -79,7 +97,27 @@ namespace Masha.Foundation.Tests
             var actual = Result(command)
                 .Map(repo.Insert);
             Assert.Equal(expected, actual);
-        }    
+        }
+
+        private Func<User, string, Result<string>> Greet => (u, g) => Result($"{g},  {u.Name}");
+
+        [Fact]
+        public void Return_Just_Result__When_ResultA_Map_ResultB()
+        {
+            var genderOfMozhi = new UserRepository()
+                .FindByIdAsResult(3)
+                .Map(u => Greet(u, "Hello"));
+            Assert.IsType<Result<string>>(genderOfMozhi);
+        }
+
+        [Fact]
+        public void Return_Result__When_Callee_Maps_Option()
+        {
+            var genderOfMozhi = new UserRepository()
+                .FindByIdAsResult(3)
+                .Map(u => u.Gender);
+            Assert.IsType<Result<string>>(genderOfMozhi);
+        }
         #endregion
     }
 }

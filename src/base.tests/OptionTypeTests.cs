@@ -80,6 +80,7 @@ namespace Masha.Foundation.Tests
             Assert.Equal(employee1, employee2);
         }
 
+        [Fact]
         public void Should_Be_Equal__When_Both_Equal()
         {
             var expected = true;
@@ -90,15 +91,44 @@ namespace Masha.Foundation.Tests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Return_Actual__When_GetOrElse_HasSome()
+        {
+            var expected = 5;
+            var actual = Some(5).GetOrElse(-1);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Return_Else__When_GetOrElse_HasSome()
+        {
+            var expected = new Employee("");
+            Employee employee = null;
+            var actual = Some(employee).GetOrElse(new Employee(""));
+
+            Assert.Equal(expected, actual);
+        }
         #endregion
 
         #region Map
+        [Fact]
         public void Return_Bind_Value__When_Some_Apply_Map()
         {
             var baseValue = 2;
             var expected = Math.Sqrt(baseValue);
             var actual = Some(baseValue).Map<int, double>(n => Math.Sqrt(n));
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Return_Just_Option__When_OptionA_Map_OptionB()
+        {
+            var genderOfMozhi = new UserRepository()
+                .FindById(3)
+                .Map(u => u.Gender);
+            Assert.IsType<Option<string>>(genderOfMozhi);
         }
         #endregion
     }

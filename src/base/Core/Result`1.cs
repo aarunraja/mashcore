@@ -12,9 +12,17 @@ namespace Masha.Foundation
 
         public Result(T value)
         {
-            this.value = value;
-            this.error = Error.None;
-            this.HasValue = true;
+            if(value != null)
+            {
+                this.value = value;
+                this.error = Error.None;
+                this.HasValue = true;
+            }else
+            {
+                this.value = value;
+                this.error = Error.SomeError;
+                this.HasValue = false;
+            }            
         }
 
         public Result(Error error)
