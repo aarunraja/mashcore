@@ -13,6 +13,12 @@
             return $"Hello, {name}";
         }
 
+        public async Task<Result<string>> KickOff(string name)
+        {
+            await Task.Delay(20);
+            throw new Exception($"{name} kicked off");
+        }
+
         public async Task<Result<string>> NonGreet(string name)
         {
             await Task.Delay(100);
@@ -29,6 +35,12 @@
         {
             await Task.Delay(50);
             return new Random().Next(0, System.Math.Abs(location));
+        }
+
+        public async Task<string> Welcome(string userName)
+        {
+            await Task.Delay(50);
+            return $"Welcome {userName}";
         }
     }
 }
