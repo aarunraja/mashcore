@@ -10,13 +10,14 @@
     public class AsyncTests
     {
         [Fact]
-        public async void AsyncTest1()
+        public async void Return_TRt__When_Asyncs_Invoked_Serially()
         {
             var svc = new AsyncService();
-            var result = svc
-                            .GreetAsync("Sheik")
-                            .MapAsync(svc.At);
-            
+            var r = await Async("Sheik")
+                    .Map(svc.Greet)
+                    .Map(svc.At)
+                    .Map(svc.GivePriority);
+            Assert.True(r.HasValue);
         }
     }
 }
