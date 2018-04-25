@@ -9,7 +9,7 @@
     {
         public async Task<Result<string>> Greet(string name)
         {
-            await Task.Delay(100);
+            await Task.Delay(20);
             return $"Hello, {name}";
         }
 
@@ -25,7 +25,7 @@
             return Error.Of(1000);
         }
 
-        public async Task<Result<int>> At(string greet)
+        public async Task<Result<int>> GeoPoint(string greet)
         {
             await Task.Delay(100);
             return greet.GetHashCode();
@@ -41,6 +41,11 @@
         {
             await Task.Delay(50);
             return $"Welcome {userName}";
+        }
+
+        public string JustNormalHello(string greetMessage)
+        {
+            return $"Your greet message is {greetMessage}";
         }
     }
 }

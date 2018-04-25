@@ -15,7 +15,7 @@
             var svc = new AsyncService();
             var r = await Async("Sheik")
                     .Map(svc.Greet)
-                    .Map(svc.At)
+                    .Map(svc.GeoPoint)
                     .Map(svc.GivePriority);
             Assert.True(r.HasValue);
         }
@@ -27,7 +27,7 @@
             var r = await "Sheik"
                     .Pipe(svc.Greet)
                     .Map(svc.KickOff)
-                    .Map(svc.At)
+                    .Map(svc.GeoPoint)
                     .Map(svc.GivePriority);
             var result = r.Match
                 (pass: i => 1, 
@@ -42,12 +42,40 @@
             var r = await "Sheik"
                     .Pipe(svc.Welcome)
                     .Map(svc.Greet)
-                    .Map(svc.At)
+                    .Map(svc.GeoPoint)
                     .Map(svc.GivePriority);
             var actual = r.Match
                 (pass: i => 1,
                 fail: e => 0);
             Assert.Equal(1, actual);
+        }
+
+        [Fact]
+        public async void Return_TRr__When_Asyncs_Include_Sync()
+        {
+            var svc = new AsyncService();
+            var r = await "Sheik"
+                    .Pipe(svc.Greet)
+                    .Map(svc.JustNormalHello);
+            var actual = r.Match
+                (pass: m => m,
+                fail: e => "None");
+            Assert.Equal("Your greet message is Hello, Sheik", actual);
+        }
+
+        [Fact]
+        public async void Return_TRr__When_Sync_FollowedBy_Asyncs()
+        {
+            var svc = new AsyncService();
+            var nameShouldBeProvided = Spec<string>(s => !string.IsNullOrEmpty(s));
+            var r = await Result("Sheik")
+                    .Map(nameShouldBeProvided, () => Error.Of(1012))
+                    .Map(svc.Greet)
+                    .Map(svc.JustNormalHello);
+            var actual = r.Match
+                (pass: m => m,
+                fail: e => "None");
+            Assert.Equal("Your greet message is Hello, Sheik", actual);
         }
     }
 }
