@@ -10,6 +10,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\base\Masha.Foundation.Base.csproj" />
+    <ProjectReference Include="..\base\Masha.Foundation.csproj" />
   </ItemGroup>
 </Project>
