@@ -2,14 +2,21 @@ namespace Masha.Foundation
 {
     using System;
 
+    public static class ErrorConstants
+    {
+        public const int NoneErrorValue = -1;
+        public const int SomeErrorValue = 0;
+    }
+
     public class Error
     {
         private int errCode;
         private string plainMsg;
         private bool isCodeBasedError;
+        private Exception exception;
 
-        public static readonly Error None = new Error(-1);
-        public static readonly Error SomeError = new Error(0);
+        public static readonly Error None = new Error(ErrorConstants.NoneErrorValue);
+        public static readonly Error SomeError = new Error(ErrorConstants.SomeErrorValue);
 
         public Error(int errCode)
         {
@@ -23,6 +30,13 @@ namespace Masha.Foundation
             isCodeBasedError = false;
         }
 
+        public Error(Exception exception)
+        {
+            this.exception = exception;
+            this.errCode = ErrorConstants.SomeErrorValue;
+            isCodeBasedError = true;
+        }
+
         private void FromAnotherError(Error anotherError)
         {
             this.errCode = anotherError.errCode;
@@ -33,9 +47,11 @@ namespace Masha.Foundation
         public int Code => errCode;
         public string Message => plainMsg;
         public bool IsNone => this.Equals(Error.None);
+        public Exception Exception => exception;
 
         public static Error Of(int errorCode) => new Error(errorCode);
         public static Error Of(string message) => new Error(message);
+        public static Error Of(Exception exception) => new Error(exception);
 
         //public static Result As(int errCode) => new Result(Error.Of(errCode));
         //public static Result As(string message) => new Result(Error.Of(message));
@@ -54,6 +70,10 @@ namespace Masha.Foundation
                 if (this.Code == errorOther.Code) return true;
                 if((!string.IsNullOrEmpty(this.Message) && !string.IsNullOrEmpty(errorOther.Message)) && 
                     this.Message.Equals(errorOther.Message, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+                if(this.exception != null && this.exception.Equals(errorOther.exception))
                 {
                     return true;
                 }

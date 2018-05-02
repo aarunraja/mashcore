@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation.Base", "base\Masha.Foundation.Base.csproj", "{B17CE72C-3EFD-4D44-A2B4-879B876C02D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation", "base\Masha.Foundation.csproj", "{B17CE72C-3EFD-4D44-A2B4-879B876C02D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation.Base.Tests", "base.tests\Masha.Foundation.Base.Tests.csproj", "{BF755FEB-B940-48E2-A949-8FB70EA5109C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation.Tests", "base.tests\Masha.Foundation.Tests.csproj", "{BF755FEB-B940-48E2-A949-8FB70EA5109C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
