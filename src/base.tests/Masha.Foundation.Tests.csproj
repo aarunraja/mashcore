@@ -4,7 +4,11 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="assets\EmployeeRepository2.cs" />
     <Compile Remove="MapBindTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="assets\EmployeeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="4.3.0" />

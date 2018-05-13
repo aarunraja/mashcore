@@ -7,15 +7,15 @@
 
     public class EmployeeService
     {
-        public Result<EmployeeCreated> Add(Func<UpdateEmployee, Result<Employee>> repo, UpdateEmployee emp)
+        public async Task<Result<EmployeeCreated>> Add(Func<UpdateEmployee, Task<Result<Employee>>> repo, UpdateEmployee cmd)
         {
-            return emp
+            return await cmd
                 .Pipe(repo)
                 .Map(e => new EmployeeCreated
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = e.Name
-                }.AsResult());
+                });                
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Masha.Foundation.Tests
         public string EmployeeId { get; set; }
         public string City { get; set; }
         public int Age { get; set; }
+        public string Name { get; set; }
     }
 }

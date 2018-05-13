@@ -17,4 +17,8 @@
     <Compile Remove="Core\ISpecification.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="Core\Reader`2.cs" />
+  </ItemGroup>
+
 </Project>
