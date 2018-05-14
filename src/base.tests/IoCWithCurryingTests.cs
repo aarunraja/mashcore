@@ -11,22 +11,22 @@
     public class IoCWithCurryingTests
     {
         [Fact]
-        public void CurryingTest1()
+        public void Simple_Func_Mapping_IoC_Repository()
         {
-            Func<UpdateEmployee, Task<Result<Employee>>> repo = new EmployeeRepository().Save;
-            var svc = new EmployeeService();
+            Func<Device, Task<Result<Device>>> repo = new DeviceRepository().Save;
+            var svc = new DeviceService();
 
-            var cmd = new UpdateEmployee
+            var cmd = new CreateDevice
             {
-                Name = "Sheik",
-                Age = 40,
-                City = "Chennai"
+                BluetoothName = "HK_Living",
+                Generation = 1,
+                SerialNumber = "ABC123"
             };
 
             var result = svc.Add(repo, cmd).Result;
             Assert.True(result.HasValue);
-            var emp = result.GetOrElse(new EmployeeCreated());
-            Assert.Equal(cmd.Name, emp.Name);
+            var emp = result.GetOrElse(new DeviceRegistered());
+            Assert.True(emp.Name.Contains(cmd.BluetoothName));
         }
     }
 }
