@@ -28,5 +28,24 @@
             var emp = result.GetOrElse(new DeviceRegistered());
             Assert.True(emp.Name.Contains(cmd.BluetoothName));
         }
+
+        [Fact]
+        public void IRepository_Mapping_IoC_Repository()
+        {            
+            var svc = new DeviceService().AddDeviceFn(new DeviceRepository());
+            
+
+            var cmd = new CreateDevice
+            {
+                BluetoothName = "HK_Living",
+                Generation = 1,
+                SerialNumber = "ABC123"
+            };
+
+            var result = svc(cmd).Result;
+            Assert.True(result.HasValue);
+            var emp = result.GetOrElse(new DeviceRegistered());
+            Assert.True(emp.Name.Contains(cmd.BluetoothName));
+        }
     }
 }

@@ -5,7 +5,7 @@
     using static Masha.Foundation.Core;
     using System.Threading.Tasks;
 
-    public class DeviceRepository
+    public class DeviceRepository : IDeviceRepository
     {
         public async Task<Result<Device>> Save(Device entity)
         {            
