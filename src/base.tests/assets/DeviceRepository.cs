@@ -7,6 +7,11 @@
 
     public class DeviceRepository : IDeviceRepository
     {
+        //public Task<Result<Device>> Get(Specification<Device> spec)
+        //{
+        //    //spec.Match()
+        //}
+
         public async Task<Result<Device>> Save(Device entity)
         {            
             return await Task.FromResult(entity);

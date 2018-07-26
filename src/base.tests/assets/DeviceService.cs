@@ -38,6 +38,14 @@
                 });
         }
 
+        public Reader<IDeviceRepository, Task<Result<DeviceRegistered>>> AddDeviceWithReaderMonad(CreateDevice cmd)
+        {
+            return new Reader<IDeviceRepository, Task<Result<DeviceRegistered>>>(async repo =>
+            {
+                return await this.AddDevice(repo, cmd);
+            });
+        }
+
         public Result<Device> Create(CreateDevice cmd)
         {
             var newDevice = new Device

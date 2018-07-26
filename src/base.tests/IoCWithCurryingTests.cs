@@ -47,5 +47,25 @@
             var emp = result.GetOrElse(new DeviceRegistered());
             Assert.True(emp.Name.Contains(cmd.BluetoothName));
         }
+
+        [Fact]
+        public async void IRepository_With_Reader_As_IoC_Repository()
+        {
+            var svc = new DeviceService();
+
+
+            var cmd = new CreateDevice
+            {
+                BluetoothName = "HK_Living",
+                Generation = 1,
+                SerialNumber = "ABC123"
+            };
+
+            var result = await svc.AddDeviceWithReaderMonad(cmd)
+                .Run(new DeviceRepository());
+            Assert.True(result.HasValue);
+            var emp = result.GetOrElse(new DeviceRegistered());
+            Assert.True(emp.Name.Contains(cmd.BluetoothName));
+        }
     }
 }

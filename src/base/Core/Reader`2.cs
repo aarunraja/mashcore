@@ -4,11 +4,11 @@
 
     public class Reader<R, T> 
     {
-        internal Func<R, T> run;
+        public Func<R, T> Run;
 
-        internal Reader(Func<R, T> run)
+        public Reader(Func<R, T> run)
         {
-            this.run = run;
+            this.Run = run;
         }
     }
 }
