@@ -2,20 +2,20 @@ namespace Masha.Foundation
 {
     using System;
 
-    public class Result
+    public class Return
     {
         internal readonly Error error;
 
         public bool HasValue {get;}
         public bool HasError => !this.HasValue; 
 
-        public Result(Error error)
+        public Return(Error error)
         {
             this.error = error;
             this.HasValue = error == Error.None;
         }
 
-        public static implicit operator Result(Error error) => new Result(error);
+        public static implicit operator Return(Error error) => new Return(error);
 
         // override object.Equals
         public override bool Equals(object obj)
@@ -25,7 +25,7 @@ namespace Masha.Foundation
                 return false;
             }
             
-            var tryOther = (Result) obj;
+            var tryOther = (Return) obj;
             if(HasValue && tryOther.HasValue)
             {
                 return true;

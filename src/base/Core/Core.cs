@@ -5,7 +5,7 @@ namespace Masha.Foundation
     public static partial class Core 
     {
         internal static string[] BoxedTypes = new string[] {
-            "Masha.Foundation.Option", "Masha.Foundation.Result"
+            "Masha.Foundation.Option", "Masha.Foundation.Return"
         }; 
 
         internal static bool IsBoxingType(string typeFullName)

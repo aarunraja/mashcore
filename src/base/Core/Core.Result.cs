@@ -12,7 +12,7 @@ namespace Masha.Foundation
             Func<T, S> pass, Func<Error, S> fail) =>
             result.HasValue ? pass(result.value) : fail(result.error);
 
-        public static S Match<S>(this Result result,
+        public static S Match<S>(this Return result,
             Func<S> pass, Func<Error, S> fail) =>
             result.HasValue ? pass() : fail(result.error);
 
@@ -47,8 +47,8 @@ namespace Masha.Foundation
         #endregion
 
         #region Monadic Stack
-        //public static Result<T> Map<T>(this Result<T> result,
-        //    Func<T, Result> f)
+        //public static Return<T> Map<T>(this Return<T> result,
+        //    Func<T, Return> f)
         //{
         //    if (result.HasValue)
         //    {
@@ -76,14 +76,14 @@ namespace Masha.Foundation
         #endregion
 
         #region Result Map
-        //public static Result<S> Map<S>(this Result result,
-        //    Func<S> f) => result.HasValue ? Result(f()) : result.error;
+        //public static Return<S> Map<S>(this Return result,
+        //    Func<S> f) => result.HasValue ? Return(f()) : result.error;
 
-        //public static Result Map(this Result result,
-        //    Func<Result> f) => result.HasValue ? f() : result.error;
+        //public static Return Map(this Return result,
+        //    Func<Return> f) => result.HasValue ? f() : result.error;
 
-        //public static Result<S> Map<S>(this Result result,
-        //    Func<Result<S>> f) => result.HasValue ? f() : result.error;
+        //public static Return<S> Map<S>(this Return result,
+        //    Func<Return<S>> f) => result.HasValue ? f() : result.error;
         #endregion
     }
 }

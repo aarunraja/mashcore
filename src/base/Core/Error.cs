@@ -53,9 +53,9 @@ namespace Masha.Foundation
         public static Error Of(string message) => new Error(message);
         public static Error Of(Exception exception) => new Error(exception);
 
-        //public static Result As(int errCode) => new Result(Error.Of(errCode));
-        //public static Result As(string message) => new Result(Error.Of(message));
-        //public static Result As(Error error) => new Result(error);
+        //public static Return As(int errCode) => new Return(Error.Of(errCode));
+        //public static Return As(string message) => new Return(Error.Of(message));
+        //public static Return As(Error error) => new Return(error);
 
         public static Result<T> As<T>(int errCode) => new Result<T>(Error.Of(errCode));
         public static Result<T> As<T>(string message) => new Result<T>(Error.Of(message));

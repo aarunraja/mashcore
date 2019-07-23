@@ -7,7 +7,7 @@
 
     public class DeviceRepository : IDeviceRepository
     {
-        //public Task<Result<Device>> Get(Specification<Device> spec)
+        //public Task<Return<Device>> Get(Specification<Device> spec)
         //{
         //    //spec.Match()
         //}
