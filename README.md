@@ -1,2 +1,1 @@
-# Masha Foundation
-## A functional C# library
+![Masha Foundation!](./docs/logo.png)
