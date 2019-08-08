@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+     <TargetFramework>netstandard2.0</TargetFramework>
+     <Version>0.1.1</Version>
+     <Authors>Sheik Uduman Ali M</Authors>
+     <Company>Masha</Company>
+     <Product>Masha Foundation Domain</Product>
+     <PackageLicenseUrl>https://github.com/MashaIO/mashcore/blob/master/LICENSE</PackageLicenseUrl>
+     <Copyright>(c) Masha, 2019</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\base\Masha.Foundation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+  </ItemGroup>
+
+  <Target Name="PushPackage" AfterTargets="Pack">
+    <Exec Command="dotnet nuget push &quot;$(MSBuildProjectDirectory)\bin\$(Configuration)\$(AssemblyName).$(Version).nupkg&quot; -s $(NugetServer) -k $(ApiKey)" />
+  </Target>
+
+</Project>
