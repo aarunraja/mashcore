@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CassandraDBSettings.cs" />
+    <Compile Remove="CassandraMappings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CassandraCSharpDriver" Version="3.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\base\Masha.Foundation.csproj" />
+    <ProjectReference Include="..\domain\Masha.Foundation.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
