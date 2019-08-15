@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation.Repository
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation.Web", "web\Masha.Foundation.Web.csproj", "{D62E9388-781A-4D48-B5BB-517C70546393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SB.Foundation.Repository.Cassandra", "SB.Foundation.Repository.Cassandra\SB.Foundation.Repository.Cassandra.csproj", "{0555AD57-5137-4E90-84C3-ABEEA8105F46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masha.Foundation.Repository.Cassandra", "repository.Cassandra\Masha.Foundation.Repository.Cassandra.csproj", "{0555AD57-5137-4E90-84C3-ABEEA8105F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

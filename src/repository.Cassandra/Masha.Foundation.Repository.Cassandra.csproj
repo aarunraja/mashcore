@@ -1,4 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Masha</Company>
+    <Authors>Sheik Uduman Ali M</Authors>
+    <Product>Masha Foundation Repository CassandraDB</Product>
+    <PackageLicenseUrl>https://github.com/MashaIO/mashcore/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>(c) Masha, 2019</Copyright>
+    <Version>0.1.2</Version>
+  </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -17,5 +27,6 @@
     <ProjectReference Include="..\base\Masha.Foundation.csproj" />
     <ProjectReference Include="..\domain\Masha.Foundation.Domain.csproj" />
   </ItemGroup>
+
 
 </Project>

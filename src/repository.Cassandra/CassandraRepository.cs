@@ -1,11 +1,10 @@
-﻿namespace SB.Foundation.Repository.Cassandra
+﻿namespace Masha.Foundation.Repository.Cassandra
 {
     using global::Cassandra;
     using global::Cassandra.Data.Linq;
     using global::Cassandra.Mapping;
     using Masha.Foundation;
     using Masha.Foundation.Domain;
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,33 +14,40 @@
     {
         bool disposed = false;
 
-        protected ISession session { get; set; }
+        protected ISession Session { get; set; }
         protected IMapper Mapper { get; set; }
         Table<TEntity> table;
 
 
         public CassandraRepository(string host, string databaseName)
         {
+            MappingConfiguration mapping = null;
 
-            var mapping = MappingConfiguration.Global.Define(
-                          new Map<TEntity>()
-                         .TableName(typeof(TEntity).Name)
-                         .PartitionKey(u => u.Id));
-            Dictionary<string, string> replication = new Dictionary<string, string>();
-
-            replication.Add("class", "SimpleStrategy");
-            replication.Add("replication_factor", "3");
+            try
+            {
+                mapping = MappingConfiguration.Global.Define(
+                             new Map<TEntity>()
+                            .TableName(typeof(TEntity).Name)
+                            .PartitionKey(u => u.Id));
+            }
+            catch (Exception ex)
+            { }
+            Dictionary<string, string> replication = new Dictionary<string, string>
+            {
+                { "class", "SimpleStrategy" },
+                { "replication_factor", "3" }
+            };
             var cluster = Cluster.Builder()
                                            .AddContactPoints(host)
                                            .WithPort(9042)
-                                           .WithLoadBalancingPolicy(new DCAwareRoundRobinPolicy("AWS_VPC_AP_SOUTHEAST_2"))
+                                           .WithLoadBalancingPolicy(new DCAwareRoundRobinPolicy("datacenter1"))
                                            .WithReconnectionPolicy(new FixedReconnectionPolicy(400, 5000, 2 * 60000, 60 * 60000))
                                            .Build();
 
-            session = cluster.Connect(databaseName);
-            session.CreateKeyspaceIfNotExists(databaseName, replication);
+            Session = cluster.Connect(databaseName);
+            Session.CreateKeyspaceIfNotExists(databaseName, replication);
 
-            table = new Table<TEntity>(session, mapping, typeof(TEntity).Name, databaseName);
+            table = new Table<TEntity>(Session, mapping, typeof(TEntity).Name, databaseName);
             table.CreateIfNotExists();
         }
 
@@ -75,10 +81,8 @@
         {
             try
             {
-             return   await table.Select(a => a).ExecuteAsync();
-                return new Result<<List<TEntity>>(result);
-                //return await Mapper.FetchAsync<TEntity>();
-                //return await Collection.Find(predicate.predicate).ToListAsync();
+             var result =   await table.Select(a => a).ExecuteAsync();
+                return result.ToList();
             }
             catch (Exception)
             {
@@ -128,16 +132,11 @@
             }
         }
 
-        Task<Result<long>> IRepository<TEntity>.GetCountAsync(Specification<TEntity> predicate)
+        public virtual async Task<Result<long>> GetCountAsync(Specification<TEntity> predicate)
         {
-            try
-            {
-               return table.PageSize;
-            }
-            catch (Exception)
-            {
-                return Error.As<long>(ErrorCodes.InternalServerError);
-            }
+            long size = table.PageSize;
+            return await Task.FromResult(size);
+
         }
 
        public async Task<Result<bool>> DeleteAsync(string id)

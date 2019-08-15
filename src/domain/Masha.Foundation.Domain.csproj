@@ -18,8 +18,4 @@
     <Folder Include="Handlers\" />
   </ItemGroup>
 
-  <Target Name="PushPackage" AfterTargets="Pack">
-    <Exec Command="dotnet nuget push &quot;$(MSBuildProjectDirectory)\bin\$(Configuration)\$(AssemblyName).$(Version).nupkg&quot; -s $(NugetServer) -k $(ApiKey)" />
-  </Target>
-
 </Project>
