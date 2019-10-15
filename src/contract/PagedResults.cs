@@ -6,6 +6,7 @@ namespace Masha.Foundation.Contract
 {
     public class PagedResults<T>
     {
+        public byte[] PageStatus { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int TotalNumberOfPages { get; set; }

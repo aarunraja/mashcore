@@ -12,9 +12,9 @@
         }
 
         public virtual string Id {set;get;}
-        public virtual DateTime CreatedOn { get; set; }
+        public virtual DateTimeOffset CreatedOn { get; set; }
         public virtual String CreatedBy { get; set; }
-        public virtual DateTime ModifiedOn { get; set; }
+        public virtual DateTimeOffset ModifiedOn { get; set; }
         public virtual String ModifiedBy { get; set; }
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
